@@ -41,6 +41,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use(express.static(path.join(__dirname, "..", "dist", "grade-trade")));
 
 // app.use(bodyParser.json()); // will return valid express middleware to parse json data
 // app.use(bodyParse.urlencoded({extended: true})) // would be for xml encoded stuff
@@ -48,5 +49,9 @@ app.use((req, res, next) => {
 
 // app.use("/api", postRoutes);
 // app.use("/api", userRoutes);
+
+app.use("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "dist", "grade-trade", "index.html"))
+);
 
 module.exports = app;
